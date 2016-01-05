@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" Content="text/html; charset=gb2312;">
+<title>移动端触摸滑动</title>
+    <script type="text/ecmascript" src="jquery.min.js"></script>
+<style>
+    
+       .moni1 {
+        width:70px;
+        height:100%;
+        float:left;
+        transition:all 0.1s ease 0s;
+         background:url(1.jpg) no-repeat;
+        background-size:auto 100%;
+       
+    }
+          .moni2 {
+        width:70px;
+        height:100%;
+        float:left;
+        transition:all 0.2s ease 0.1s;
+        background:url(1.jpg) no-repeat;
+        background-position-x:-70px;
+        background-size:auto 100%;
+       
+    }
+             .moni3 {
+        width:70px;
+        height:100%;
+        float:left;
+        transition:all 0.3s ease 0.2s;
+        background:url(1.jpg) no-repeat;
+        background-position-x:-140px;
+        background-size:auto 100%;
+       
+    }
+                .moni4 {
+        width:70px;
+        height:100%;
+        float:left;
+        transition:all 0.4s ease 0.3s;
+        background:url(1.jpg) no-repeat;
+        background-position-x:-210px;
+        background-size:auto 100%;
+       
+    }
+
+                   .moni5 {
+        width:70px;
+        height:100%;
+        float:left;
+        transition:all 0.5s ease 0.4s;
+        background:url(1.jpg) no-repeat;
+        background-position-x:-280px;
+        background-size:auto 100%;
+       
+    }
+                   .moni6 {
+        width:70px;
+        height:100%;
+        float:left;
+        transition:all 0.6s ease 0.5s;
+        background:url(1.jpg) no-repeat;
+        background-position-x:-350px;
+        background-size:auto 100%;
+       
+    }
+
+    .imgContainer {
+        width:420px;
+        height:300px;
+        margin:0px auto;
+     
+         transition:all 3s ease 0s;
+        
+    }
+    .c90 {
+       -webkit-transform:rotateX(90deg)
+    }
+    .c360 {
+          -webkit-transform:rotateX(360deg)
+    }
+</style>
+</head>
+<body>
+    <div class="imgContainer">
+         <div class="moni1"></div>
+         <div class="moni2"></div>
+         <div class="moni3"></div>
+         <div class="moni4"></div>
+         <div class="moni5"></div>
+         <div class="moni6"></div>
+         <div class="leftool"></div>
+    </div>
+
+    <input  type="button" id="test" value="下一张"/>
+    <input  type="button" id="Button1" value="上一张"/>
+    </body> 
+    </html>
+<script type="text/javascript">
+   
+    $(function () {
+        ImgageRoll = {
+            index: 1,
+            imgArray: null,
+            isRoll:true,//用于判断是否 自动切图
+            Init: function (imgArray) {
+                
+                this.imgArray = imgArray;
+                setInterval(function () {
+                    if (!this.isRoll) {
+                        this.isRoll = true;
+                        return;
+                    }
+                    $(".imgContainer div").css("background-image", "url(" + this.ImgageRoll.imgArray[this.ImgageRoll.index] + ")");
+                    this.ImgageRoll.index++;
+                    if (this.ImgageRoll.index >= this.ImgageRoll.imgArray.length) {
+                        this.ImgageRoll.index = 0;
+                    }
+                   
+                   
+                  
+                },2000)
+            },
+            Next: function () {
+                isRoll = false;
+                this.index++;
+                if (this.index >= this.imgArray.length) {
+                    this.index = 0;
+                }
+                $(".imgContainer div").css("background-image", "url(" + this.imgArray[this.index] + ")");
+            },
+            Prev: function () {
+                isRoll = false;
+                this.index--;
+                if (this.index<=0) {
+                    this.index=this.imgArray.length-1;
+                }
+                $(".imgContainer div").css("background-image", "url(" + this.imgArray[this.index] + ")");
+            }
+           
+        };
+        ImgageRoll.Init(["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"]);
+        $("#test").click(function () {
+            ImgageRoll.Prev();
+        })
+        $("#Button1").click(function () {
+            ImgageRoll.Next();
+        }) 
+    })
+   
+</script>
